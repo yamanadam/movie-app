@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import avatar from "../assets/icons/avatar.png";
 import { logout } from "../auth/firebase";
 import { useAuthContext } from "../context/AuthProvider";
+import Switch from "./SwitchDarkWhite";
 
 const Navbar = () => {
   // const currentUser = { displayName: "adem yaman" };
@@ -75,6 +76,7 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
+          <Switch />
         </div>
       </nav>
       <div className="h-[70px]"></div>

@@ -6,7 +6,7 @@ import AppRouter from "./router/AppRouter";
 
 const App = () => {
   return (
-    <div className="bg-[#23242a]">
+    <div className="bg-white dark:bg-[#23242a]">
       <AuthProvider>
         <AppRouter />
       </AuthProvider>
