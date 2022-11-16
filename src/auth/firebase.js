@@ -9,6 +9,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+import { toastErrorNotify, toastSuccessNotify } from "../helpers/Toastify";
 
 //* Your web app's Firebase configuration
 const firebaseConfig = {
@@ -32,8 +33,11 @@ export const createUser = async (email, password, navigate, displayName) => {
       displayName: displayName,
     });
     navigate("/");
+    toastSuccessNotify("You sign in successflly");
   } catch (error) {
-    alert(error.message);
+    toastErrorNotify(error.message);
+
+    console.log(error.message);
   }
 };
 
@@ -41,8 +45,10 @@ export const loginUser = async (email, password, navigate) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
     navigate("/");
+    toastSuccessNotify("You login successfully");
   } catch (error) {
-    alert(error.message);
+    toastErrorNotify(error.message);
+    console.log(error.message);
   }
 };
 
@@ -62,6 +68,7 @@ export const userObserver = (setCurrentUser) => {
 
 export const logout = () => {
   signOut(auth);
+  toastSuccessNotify("You logout successfully");
 };
 
 export const googleEnter = (navigate) => {
@@ -71,8 +78,10 @@ export const googleEnter = (navigate) => {
     .then((result) => {
       console.log(result);
       navigate("/");
+      toastSuccessNotify("You login successfully");
     })
     .catch((err) => {
       console.log(err);
+      toastErrorNotify(err.message);
     });
 };

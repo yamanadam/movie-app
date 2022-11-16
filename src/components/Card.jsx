@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthProvider";
+import { toastWarnNotify } from "../helpers/Toastify";
 
 const IMG_API = "https://image.tmdb.org/t/p/w1280";
 const defaultImage =
@@ -26,7 +27,7 @@ const Card = ({ poster_path, title, overview, vote_average, id }) => {
       className="movie"
       onClick={() => {
         navigate("detail/" + id);
-        !currentUser && alert("Please Log in");
+        !currentUser && toastWarnNotify("Please Log in");
       }}
     >
       <img
