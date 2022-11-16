@@ -54,6 +54,7 @@ export const userObserver = (setCurrentUser) => {
       console.log(user);
       // ...
     } else {
+      setCurrentUser(false);
       console.log("user logout");
     }
   });
