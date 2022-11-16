@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthProvider";
 
 const IMG_API = "https://image.tmdb.org/t/p/w1280";
@@ -18,8 +19,16 @@ const Card = ({ poster_path, title, overview, vote_average, id }) => {
     }
   };
 
+  const navigate = useNavigate();
+
   return (
-    <div className="movie">
+    <div
+      className="movie"
+      onClick={() => {
+        navigate("detail/" + id);
+        !currentUser && alert("Please Log in");
+      }}
+    >
       <img
         loading="lazy"
         src={poster_path ? IMG_API + poster_path : defaultImage}
