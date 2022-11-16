@@ -2,9 +2,12 @@ import { initializeApp } from "firebase/app";
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 
 //* Your web app's Firebase configuration
@@ -22,9 +25,12 @@ const app = initializeApp(firebaseConfig);
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
 
-export const createUser = async (email, password, navigate) => {
+export const createUser = async (email, password, navigate, displayName) => {
   try {
     await createUserWithEmailAndPassword(auth, email, password);
+    await updateProfile(auth.currentUser, {
+      displayName: displayName,
+    });
     navigate("/");
   } catch (error) {
     alert(error.message);
@@ -55,4 +61,17 @@ export const userObserver = (setCurrentUser) => {
 
 export const logout = () => {
   signOut(auth);
+};
+
+export const googleEnter = (navigate) => {
+  const provider = new GoogleAuthProvider();
+
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      console.log(result);
+      navigate("/");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
